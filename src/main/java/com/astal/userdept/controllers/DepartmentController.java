@@ -8,34 +8,32 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.astal.userdept.entities.User;
-import com.astal.userdept.repositories.InnerUserRepository;
+import com.astal.userdept.entities.Department;
+import com.astal.userdept.repositories.InnerDepartmentRepository;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-
-
 @RestController
-@RequestMapping(value = "/users") // se eu acessar o localhost:8080/users estarei acessando aqui
-public class UserController {
+@RequestMapping(value = "/departments")
+public class DepartmentController {
 
     @Autowired
-    private InnerUserRepository repository;
+    private InnerDepartmentRepository repository;
 
     @GetMapping
-    public List<User> getAllUsers() {
+    public List<Department> getAllDepartments() {
         return repository.findAll();
     }
 
     @GetMapping(value = "/{id}")
-    public User getUserById(@PathVariable Long id) {
-        User result = repository.findById(id).orElse(null);
+    public Department getDepartmentById(@PathVariable Long id) {
+        Department result = repository.findById(id).orElse(null);
         return result;
     }
     
     @PostMapping
-    public User insert(@RequestBody User user) {
-        User result = repository.save(user);
+    public Department insert(@RequestBody Department department) {
+        Department result = repository.save(department);
         return result;
     }
     
